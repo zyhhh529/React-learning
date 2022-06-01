@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Expenses from "./Expenses/Expenses";
+import ExpenseForm from "./NewExpense/ExpenseForm";
 
 export default function App() {
-  const expenses = [
+  const dummyExp = [
     {
       id: "e1",
       title: "Toilet Paper",
@@ -24,8 +25,19 @@ export default function App() {
     },
   ];
 
+  const [expenses, setExpenses] = useState(dummyExp);
+
+
+  const newExpHandler = (newExp) => {
+    // console.log(newExp);
+    setExpenses((prevExpense) => {
+      return [newExp, ...prevExpense];
+    });
+  };
+
   return (
     <>
+      <ExpenseForm onNewExpense={newExpHandler} />
       <Expenses items={expenses} />
     </>
   );
